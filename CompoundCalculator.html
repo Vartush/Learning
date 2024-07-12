@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Compound Interest Calculator for SIP</title>
+<style>
+    body {
+            margin: 0;
+            padding: 0;
+            background-image: url('image/bg2.jpg');
+            /* Replace with your image URL */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 100vh;
+            /* Ensures the body takes the full height of the viewport */
+
+        }
+</style>
+</head>
+<body>
+
+<h2>Compound Interest Calculator for SIP</h2>
+
+<form id="compoundInterestForm">
+    <label for="sipAmount">SIP Amount (in Rs):</label><br>
+    <input type="number" id="sipAmount" name="sipAmount" required><br><br>
+    
+    <label for="annualRate">Annual Compounded Interest Rate (%):</label><br>
+    <input type="number" id="annualRate" name="annualRate" required><br><br>
+    
+    <label for="months">Number of Months:</label><br>
+    <input type="number" id="months" name="months" required><br><br>
+    
+    <button type="button" onclick="calculateCompoundInterest()">Calculate</button>
+</form>
+
+<p id="principal"></p>
+<p id="interestEarned"></p>
+<p id="totalAmount"></p>
+
+<script>
+function calculateCompoundInterest() {
+    var sipAmount = parseFloat(document.getElementById('sipAmount').value);
+    var annualRate = parseFloat(document.getElementById('annualRate').value);
+    var months = parseFloat(document.getElementById('months').value);
+    
+    var monthlyRate = annualRate / 12 / 100;
+    var numberOfPeriods = months;
+    
+    var compoundInterest = sipAmount * (Math.pow(1 + monthlyRate, numberOfPeriods) - 1);
+    
+    var principal = sipAmount * numberOfPeriods;
+    
+    var interestEarned = compoundInterest - principal;
+    
+    var totalAmount = sipAmount * numberOfPeriods + compoundInterest;
+    
+    document.getElementById('principal').innerHTML = "Principal Sum: Rs." + principal.toFixed(2);
+    document.getElementById('interestEarned').innerHTML = "Interest Earned during the period: Rs." + interestEarned.toFixed(2);
+    document.getElementById('totalAmount').innerHTML = "Total Amount after " + months + " months: Rs." + totalAmount.toFixed(2);
+}
+</script>
+<header>
+    <nav>
+        <a href="http://127.0.0.1:5500/index.html">HOME</a>
+    </nav>
+</header>
+</body>
+</html>
